@@ -1,7 +1,7 @@
-var express = require('express')
-  , router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-router.use('/api', require('./users'))
+router.use('/api', require('./users'));
 
 router.get('/', function(req, res) {
   res.send('Home page');
