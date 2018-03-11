@@ -1,6 +1,10 @@
-var express = require('express')
-  , router = express.Router();
-const {User} = require('../models/user');
+const express = require('express'),
+  router = express.Router();
+const ObjectID = require('mongodb').ObjectID;
+
+const {
+  User
+} = require('../models/user');
 
 //POST users
 router.post('/users', (req, res) => {
@@ -19,23 +23,36 @@ router.post('/users', (req, res) => {
 });
 
 //GET users
-router.get('/users', (req, res)=>{
-  User.find({}).then((docs)=>{
-    res.send({docs});
-  },(e)=>{
+router.get('/users', (req, res) => {
+  User.find({}).then((docs) => {
+    res.send({
+      docs
+    });
+  }, (e) => {
     res.status(400).send(e);
   });
 });
 
-//GET users
-router.get('/users/:userId', (req, res)=>{
-  var userId = req.params.userId;
+router.get('/users/:id', (req, res) => {
+  var id = req.params.id;
 
-  User.findById(userId).then((doc)=>{
-    res.send(doc);
-  },(e)=>{
-    res.status(400).send(e);
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  User.findById(id).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({
+      todo
+    });
+  }).catch((e) => {
+    console.log(e);
+    res.status(400).send();
   });
 });
+
 
 module.exports = router;
