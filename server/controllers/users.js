@@ -3,7 +3,7 @@ var express = require('express')
 
 
 router.get('/users', function(req, res) {
-  res.send([])
+  res.send([{id:1, name:'Yuriy'}, {id:2, name: 'Yevheniy'}])
 })
 
 
