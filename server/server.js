@@ -1,14 +1,23 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.json());
+app.use(require('./controllers'));
 
-var {mongoose} = require('./db/mongoose');
+var {
+  mongoose,
+  mongooseUri
+} = require('./db/mongoose');
 
 
-var express = require('express')
-  , app = express()
+mongoose.connect(mongooseUri).then(() => {
+  console.log('Database connection ready');
+  const server = app.listen(process.env.PORT || 8080, function() {
+    var port = server.address().port;
+    console.log('App now running on port ' + port);
+  });
 
-app.use(require('./controllers'))
-
-app.listen(3000, function() {
-  console.log('Listening on port 3000...')
-})
+}, (err) => {
+  console.log(err);
+  process.exit(1);
+});
