@@ -22,7 +22,7 @@ var userSchema = new Schema({
     minlength: 1
   },
   phone: {
-    type: Number,
+    type: String,
     required: true   
   },
 

@@ -1,0 +1,43 @@
+<h2>Users</h2>
+<ul class="heroes">
+  <li *ngFor="let user of users"
+    [class.selected]="user === selectedUser"
+    (click)="onSelect(user)">
+    <span class="badge">{{user._id}}</span> {{user.firstName}}
+  </li>
+</ul>
+
+<div *ngIf="selectedUser">
+
+  <h2>{{ selectedUser.firstName | uppercase }} Details</h2>
+  <div><span>id: </span>{{selectedUser._id}}</div>
+  <div>
+    <label>first name:
+      <input [(ngModel)]="selectedUser.firstName" placeholder="firstName">
+    
+    </label>    
+  </div>
+  <div>
+    <label>last name:
+      <input [(ngModel)]="selectedUser.lastName" placeholder="lastName">
+    </label>
+  </div>
+  <div>
+    <label>email:
+      <input [(ngModel)]="selectedUser.email" placeholder="email">
+    </label>
+  </div>
+  <div>
+    <label>phone:
+      <input [(ngModel)]="selectedUser.phone" placeholder="phone">
+    </label>
+  </div>
+
+</div>
+
+
+<!-- 
+Copyright 2017-2018 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
