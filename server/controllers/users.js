@@ -25,9 +25,9 @@ router.post('/users', (req, res) => {
 //GET users
 router.get('/users', (req, res) => {
   User.find({}).then((docs) => {
-    res.send({
+    res.send(
       docs
-    });
+    );
   }, (e) => {
     res.status(400).send(e);
   });
