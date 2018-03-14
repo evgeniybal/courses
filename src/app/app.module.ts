@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { DxDataGridModule } from 'devextreme-angular';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AppRoutingModule } from './/app-routing.module';
     MessagesComponent
   ],
   imports: [
+    DxDataGridModule,
     BrowserModule,
     FormsModule,
     HttpModule,

@@ -10,6 +10,7 @@ import { UserService } from '../user.service';
 export class UsersComponent implements OnInit {
 
   selectedUser: User;
+  showFilterRow: true;
   title = "";
   users: User[];
   user: User ={

@@ -1,8 +1,24 @@
 <h2>Our Users</h2>
-<ul class="heroes">
+<!-- <ul class="heroes">
   <li *ngFor="let user of users">
        <a routerLink="/userdetail/{{user._id}}">
       <span class="badge">{{user._id}}</span> {{user.firstName}}
     </a>
   </li>
-</ul>
+</ul> -->
+
+<dx-data-grid [dataSource]="users">
+    <dxo-filter-row 
+    [visible]=true 
+    ></dxo-filter-row>
+<dxo-header-filter 
+    [visible]=true></dxo-header-filter>
+<dxo-search-panel 
+    [visible]="true" 
+    [width]="240" 
+    placeholder="Search..."></dxo-search-panel>
+  <dxi-column dataField="firstName" caption="First Name"></dxi-column>
+  <dxi-column dataField="lastName" caption="Last Name" [visible]="showLastName"></dxi-column>
+  <dxi-column dataField="email" caption="Email"></dxi-column>
+  <dxi-column dataField="phone" caption="Phone"></dxi-column>
+</dx-data-grid>

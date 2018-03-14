@@ -13,6 +13,7 @@ import { UserService }  from '../user.service';
 export class UserDetailComponent implements OnInit {
 
   @Input() user: User;
+  showLastName = true;
 
   constructor(
     private route: ActivatedRoute,
