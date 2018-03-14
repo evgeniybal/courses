@@ -3,11 +3,16 @@ const bodyParser = require('body-parser');
 //const distDir = __dirname + '/dist/';
 const app = express();
 app.use(bodyParser.json());
-// console.log(distDir);
-// app.use(express.static(distDir));
 app.use(express.static('dist'));
-
 app.use(require('./controllers'));
+
+
+app.use(function(req, res) {
+  // Use res.sendfile, as it streams instead of reading the file into memory.  
+  var baseUrl =  __dirname.substring(0, __dirname.lastIndexOf('server'));    
+  var angularIndex = baseUrl + 'dist/index.html'; 
+  res.sendFile(angularIndex);
+});
 
 var {
   mongoose,
