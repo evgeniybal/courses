@@ -7,20 +7,27 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserService } from './user.service';
+import { MessageService } from './message.service';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
