@@ -30,8 +30,6 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.getUsers();
   }
-  onSelect(user: User): void {
-    this.selectedUser = user;
-  }
+ 
 
 }

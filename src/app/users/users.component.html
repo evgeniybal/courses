@@ -1,17 +1,8 @@
 <h2>Our Users</h2>
 <ul class="heroes">
-  <li *ngFor="let user of users"
-    [class.selected]="user === selectedUser"
-    (click)="onSelect(user)">
-    <span class="badge">{{user._id}}</span> {{user.firstName}}
+  <li *ngFor="let user of users">
+       <a routerLink="/userdetail/{{user._id}}">
+      <span class="badge">{{user._id}}</span> {{user.firstName}}
+    </a>
   </li>
 </ul>
-
-<app-user-detail [user]="selectedUser"></app-user-detail>
-
-
-<!-- 
-Copyright 2017-2018 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
--->

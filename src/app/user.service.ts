@@ -18,4 +18,10 @@ export class UserService {
 
     return of(USERS);
   }
+
+  getUser(id: string): Observable<User> {
+    // Todo: send the message _after_ fetching the hero
+    this.messageService.add(`UserService: fetched user id=${id}`);
+    return of(USERS.find(user => user._id === id));
+  }
 }

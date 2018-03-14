@@ -3,7 +3,7 @@ import {User} from './User';
 export const USERS: User[] = [
   {
     "_id": "5aa79cb3fc13ae40dd0003c2",
-    "firstName": "Christine",
+    "firstName": "Bob",
     "lastName": "Maitland",
     "email": "cmaitland0@hibu.com",
     "phone": "1975547796"
