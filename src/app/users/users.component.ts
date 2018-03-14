@@ -10,27 +10,27 @@ import { UserService } from '../user.service';
 export class UsersComponent implements OnInit {
 
   selectedUser: User;
-  showFilterRow: true;
+  showFilterRow: true;  
   title = "";
   users: User[];
-  user: User ={
-    _id:'1', 
-    firstName:'First User',
-     lastName:'Test',
-      email:'test@mail.com',
-      phone: '0634567654'
+  user: User = {
+    _id: '1',
+    firstName: 'First User',
+    lastName: 'Test',
+    email: 'test@mail.com',
+    phone: '0634567654'
   };
-  
 
-  constructor(private userService: UserService) {  }
-   getUsers(): void {
-      this.userService.getUsers()
-      .subscribe(users=>this.users = users);
-   }
+
+  constructor(private userService: UserService) { }
+  getUsers(): void {
+    this.userService.getUsers()
+      .subscribe(users => this.users = users);
+  }
 
   ngOnInit() {
     this.getUsers();
   }
- 
+
 
 }
