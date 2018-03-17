@@ -9,7 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot -prod"
+    "postinstall": "ng build --aot -prod",
+    "watch-server": "nodemon ./server/server.js --watch server",
+    "watch-client": "ng serve --proxy-config proxy.config.json"
   },
   "private": true,
   "dependencies": {
