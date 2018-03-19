@@ -13,6 +13,7 @@
   <dxi-column dataField="phone" caption="Phone"></dxi-column>
   <div *dxTemplate="let data of 'cellTemplate'">
     <a class="dx-link" (click)="rowClickEvent($event, data,'edit')">Details</a>
-    <!-- <a class="dx-link" href="userdetail/{{data.data._id}}">Edit</a> THIS IS WRONG APPROACH RELOAD ALL FILES!!!-->
+    <a class="dx-link" routerLink="/userdetail/{{data.data._id}}">Open</a>
+
   </div>
 </dx-data-grid>
