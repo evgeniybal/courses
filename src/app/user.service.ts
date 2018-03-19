@@ -20,7 +20,7 @@ export class UserService {
   }
 
   private log(message: string) {
-    this.messageService.add('HeroService: ' + message);
+    this.messageService.add('UserService: ' + message);
   }
 
   getUsers(): Observable<User[]> {
