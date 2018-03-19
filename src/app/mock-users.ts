@@ -6,7 +6,7 @@ export const USERS: User[] = [
     "firstName": "Bob",
     "lastName": "Maitland",
     "email": "cmaitland0@hibu.com",
-    "phone": "1975547796"
+    "phone": "1975547796"    
   }, {
     "_id": 
       "5aa79cb3fc13ae40dd0003c3"

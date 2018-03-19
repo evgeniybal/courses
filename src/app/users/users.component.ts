@@ -1,3 +1,5 @@
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AppRoutingModule } from '../app-routing.module';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -10,19 +12,14 @@ import { UserService } from '../user.service';
 export class UsersComponent implements OnInit {
 
   selectedUser: User;
-  showFilterRow: true;  
+  showFilterRow: true;
   title = "";
   users: User[];
-  user: User = {
-    _id: '1',
-    firstName: 'First User',
-    lastName: 'Test',
-    email: 'test@mail.com',
-    phone: '0634567654'
-  };
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private router: Router) { }
+
   getUsers(): void {
     this.userService.getUsers()
       .subscribe(users => this.users = users);
@@ -32,5 +29,26 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
+  rowClickEvent(e, data) {
+    let url = 'userdetail/' + data.data._id;
+    this.router.navigate([url]);
+  }
+
+  // onCellPrepared(e) {
+  //   if (e.rowType == "data") {
+  //     let cell = e.cellElement;
+  //     switch (e.column.command) {
+  //       case "edit":
+  //         // ...
+  //         break;
+  //       case "adaptive":
+  //         // ...
+  //         break;
+  //       case "select":
+  //         // ...
+  //         break;
+  //     }
+  //   }
+  // };
 
 }

@@ -1,24 +1,18 @@
 <h2>Our Users</h2>
-<!-- <ul class="heroes">
-  <li *ngFor="let user of users">
-       <a routerLink="/userdetail/{{user._id}}">
-      <span class="badge">{{user._id}}</span> {{user.firstName}}
-    </a>
-  </li>
-</ul> -->
-
 <dx-data-grid [dataSource]="users">
-    <dxo-filter-row 
-    [visible]=true 
-    ></dxo-filter-row>
-<dxo-header-filter 
-    [visible]=true></dxo-header-filter>
-<dxo-search-panel 
-    [visible]="true" 
-    [width]="240" 
-    placeholder="Search..."></dxo-search-panel>
+  (onCellPrepared)="onCellPrepared($event)">
+
+  <dxo-filter-row [visible]=true></dxo-filter-row>
+  <dxo-header-filter [visible]=true></dxo-header-filter>
+  <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+
+  <dxi-column dataField="_id" [width]="100" [allowFiltering]="false" [allowSorting]="false" cellTemplate="cellTemplate"></dxi-column>
   <dxi-column dataField="firstName" caption="First Name"></dxi-column>
   <dxi-column dataField="lastName" caption="Last Name"></dxi-column>
   <dxi-column dataField="email" caption="Email"></dxi-column>
   <dxi-column dataField="phone" caption="Phone"></dxi-column>
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <!-- <a class="dx-link" (click)="rowClickEvent($event, data,'edit')">Edit</a> -->
+    <a class="dx-link" href="userdetail/{{data.data._id}}">Edit</a>
+  </div>
 </dx-data-grid>

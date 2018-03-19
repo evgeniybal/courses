@@ -13,28 +13,33 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
-  constructor(private messageService: MessageService, private http:HttpClient) { }
+  constructor(private messageService: MessageService, private http: HttpClient) { }
   private usersUrl = 'api/users';
   getUsersSync(): User[] {
     return USERS;
   }
- 
+
   private log(message: string) {
     this.messageService.add('HeroService: ' + message);
   }
 
-  getUsers (): Observable<User[]> {
-   // console.log(this.usersUrl);return of(USERS);
+  getUsers(): Observable<User[]> {
+    // console.log(this.usersUrl);return of(USERS);
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
         tap(users => this.log(`fetched users`)),
         catchError(this.handleError('getUsers', []))
       );
   }
+
+
+  /** GET user by id. Will 404 if id not found */
   getUser(id: string): Observable<User> {
-    // Todo: send the message _after_ fetching the hero
-    this.messageService.add(`UserService: fetched user id=${id}`);
-    return of(USERS.find(user => user._id === id));
+    const url = `${this.usersUrl}/${id}`;
+    return this.http.get<User>(url).pipe(
+      tap(_ => this.log(`fetched user id=${id}`)),
+      catchError(this.handleError<User>(`getHero id=${id}`))
+    );
   }
 
   /**
@@ -43,19 +48,19 @@ export class UserService {
  * @param operation - name of the operation that failed
  * @param result - optional value to return as the observable result
  */
-private handleError<T> (operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-    // TODO: send the error to remote logging infrastructure
-    console.log(operation);
-    console.error(error); // log to console instead
+      // TODO: send the error to remote logging infrastructure
+      console.log(operation);
+      console.error(error); // log to console instead
 
-    // TODO: better job of transforming error for user consumption
-    //this.log(`${operation} failed: ${error.message}`);
+      // TODO: better job of transforming error for user consumption
+      //this.log(`${operation} failed: ${error.message}`);
 
-    // Let the app keep running by returning an empty result.
-    return of(result as T);
-  };
- 
-}
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+
+  }
 }
