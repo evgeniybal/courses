@@ -40,14 +40,14 @@ router.get('/users/:id', (req, res) => {
     return res.status(404).send();
   }
 
-  User.findById(id).then((todo) => {
-    if (!todo) {
+  User.findById(id).then((user) => {
+    if (!user) {
       return res.status(404).send();
     }
 
-    res.send({
-      todo
-    });
+    res.send(
+      user
+    );
   }).catch((e) => {
     console.log(e);
     res.status(400).send();
