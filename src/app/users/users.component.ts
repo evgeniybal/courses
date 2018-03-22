@@ -3,6 +3,9 @@ import { AppRoutingModule } from '../app-routing.module';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import 'devextreme/data/odata/store';
+
+import { DxDataGridModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-users',
@@ -14,19 +17,39 @@ export class UsersComponent implements OnInit {
   selectedUser: User;
   showFilterRow: true;
   title = "";
-  users: User[];
+  //users: User[];
+  dataSource: any;
 
 
   constructor(private userService: UserService,
-    private router: Router) { }
+    private router: Router) {
+      const SERVICE_URL = "api/users"; 
 
-  getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
+      
+    this.dataSource = {
+      store: {
+        type: 'odata',
+        url: 'api/users'
+      },
+      select: [
+        '_id',
+        'firstName',
+        'lastName',
+        'email'
+
+      ],
+      filter: ['firstName', '=', 'Bob']
+    }
+
   }
 
+  // getUsers(): void {
+  //   this.userService.getUsers()
+  //     .subscribe(users => this.users = users);
+  // }
+
   ngOnInit() {
-    this.getUsers();
+   // this.getUsers();
   }
 
   rowClickEvent(e, data) {

@@ -22,15 +22,22 @@ router.post('/users', (req, res) => {
   });
 });
 
+
 //GET users
-router.get('/users', (req, res) => {
-  User.find({}).then((docs) => {
-    res.send(
-      docs
-    );
-  }, (e) => {
+router.get('/users', async (req, res) => {
+
+  try {
+    let total = await User.count();
+    let docs = await User.find({});
+  //console.log(req);
+    res.send({
+      data: docs,
+      totalCount: total
+    });
+  }
+  catch (e) {
     res.status(400).send(e);
-  });
+  }
 });
 
 router.get('/users/:id', (req, res) => {
