@@ -25,17 +25,42 @@ router.post('/users', (req, res) => {
 
 //GET users
 router.get('/users', async (req, res) => {
-
+  let orderByObj = {};
+  console.warn(req.query);
+  var selectObj = req.query.$select.split(',')
+    .reduce(function (acc, cur, i) {
+      acc[cur] = 1;
+      return acc;
+    }, {});
+  if (req.query.$orderby) {
+    orderByObj = req.query.$orderby.split(',')
+      .reduce(function (acc, cur, i) {
+        let cur1 = cur.split(' ');
+        if (cur1[1] === 'desc') {
+          cur = cur1[0];
+          acc[cur] = -1;
+        } else {
+          acc[cur] = 1;
+        }
+        return acc;
+      }, {});
+  }
   try {
     let total = await User.count();
-    let docs = await User.find({});
-  //console.log(req);
+    let query = {
+      $query: {},
+      $project: selectObj,
+      $orderby: orderByObj
+    };
+    console.log('query mapped: ', query);
+
+    let docs = await User.find({}).sort(orderByObj);
+    //console.log(req);
     res.send({
       data: docs,
       totalCount: total
     });
-  }
-  catch (e) {
+  } catch (e) {
     res.status(400).send(e);
   }
 });
